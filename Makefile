@@ -36,6 +36,9 @@ APP_INSTALL:
 	cp $(SRC)/bmf      $(INSTDIR)/bin
 	cp $(SRC)/fits     $(INSTDIR)/bin
 	cp $(SRC)/lr       $(INSTDIR)/bin
+	cp $(SRC)/pr       $(INSTDIR)/bin
+	cp $(SRC)/gr       $(INSTDIR)/bin
+	cp $(SRC)/er       $(INSTDIR)/bin
 	cp $(SRC)/tot      $(INSTDIR)/bin
 	cp $(SRC)/totg     $(INSTDIR)/bin
 	cp $(SRC)/blda     $(INSTDIR)/bin

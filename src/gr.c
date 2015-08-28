@@ -1,10 +1,11 @@
 /* ========================================================
  *   Copyright (C) 2015 All rights reserved.
  *   
- *   filename : lr.c
- *   author   : ***
- *   date     : 2015-08-18
- *   info     : 
+ *   filename : gr.c
+ *   author   : liuzhiqiang01@baidu.com
+ *   date     : 2015-08-27
+ *   info     : guassian regression implementation
+ *              using regression framework
  * ======================================================== */
 
 #include <stdio.h>
@@ -12,12 +13,12 @@
 #include <string.h>
 #include "regression.h"
 
-typedef Regression LR;
+typedef Regression GR;
 
 
 void help() {
-    fprintf(stderr, "\nLR [Logistic Regression] usage:        \n");
-    fprintf(stderr, "\n./lr -a <double> -l <double> -b <int> -r <int> -n <int> -s <int> -f <string> -t <string> -o <string\n");
+    fprintf(stderr, "\nGR [Guassian Regression] usage:        \n");
+    fprintf(stderr, "\n./gr -a <double> -l <double> -b <int> -r <int> -n <int> -s <int> -f <string> -t <string> -o <string\n");
     fprintf(stderr, "     -a  regularized paramenter          \n");
     fprintf(stderr, "     -l  Convergence tolerance           \n");
     fprintf(stderr, "     -b  1:binary or else                \n");
@@ -103,30 +104,29 @@ int parse_command_line(RP *p, int argc, char *argv[]){
 
 
 int main(int argc, char *argv[]) {
-    LR *lr = create_regression();
-    if (-1 == parse_command_line(&(lr->p), argc, argv)){
+    GR *gr = create_regression();
+    if (-1 == parse_command_line(&(gr->p), argc, argv)){
         help();
         goto except;
     }
     fprintf(stderr, "command line parse done\n");
-    if (-1 == init_regression(lr)){
+    if (-1 == init_regression(gr)){
         goto except;
     }
     fprintf(stderr, "load data done\n");
-    fprintf(stderr, "train: %d, lenx: %d\n", lr->train_ds->r, lr->c);
-    if (lr->test_ds){
-        fprintf(stderr, " test: %d\n", lr->test_ds->r);
+    fprintf(stderr, "train: %d, lenx: %d\n", gr->train_ds->r, gr->c);
+    if (gr->test_ds){
+        fprintf(stderr, " test: %d\n", gr->test_ds->r);
     }
-    learn_regression(lr);
-    save_regression(lr, lr->p.niters);
-    free_regression(lr);
-    lr = NULL;
+    learn_regression(gr);
+    save_regression(gr, gr->p.niters);
+    free_regression(gr);
+    gr = NULL;
     return 0;
 
 except:
-    free_regression(lr);
-    lr = NULL;
+    free_regression(gr);
+    gr = NULL;
     return -1;
 }
-
 

@@ -119,17 +119,55 @@ SET_TARGET_PROPERTIES(bmf_static PROPERTIES CLEAN_DIRECT_OUTPUT 1)
 INSTALL(TARGETS bmf_static LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
 INSTALL(FILES mf.h DESTINATION include)
 
-#lib LR
+#lib regression
+SET(LIBregression_SRC regression.c)
+ADD_LIBRARY(regression_static STATIC ${LIBregression_SRC})
+SET_TARGET_PROPERTIES(regression_static PROPERTIES OUTPUT_NAME "regression")
+SET_TARGET_PROPERTIES(regression_static PROPERTIES CLEAN_DIRECT_OUTPUT 1)
+INSTALL(TARGETS regression_static LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
+INSTALL(FILES regression.h DESTINATION include)
+target_link_libraries(regression_static str_static)
+target_link_libraries(regression_static idmap_static)
+
+#lib lr
 SET(LIBlr_SRC lr.c)
 ADD_LIBRARY(lr_static STATIC ${LIBlr_SRC})
 SET_TARGET_PROPERTIES(lr_static PROPERTIES OUTPUT_NAME "lr")
 SET_TARGET_PROPERTIES(lr_static PROPERTIES CLEAN_DIRECT_OUTPUT 1)
 INSTALL(TARGETS lr_static LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
-INSTALL(FILES lr.h DESTINATION include)
+INSTALL(FILES regression.h DESTINATION include)
 target_link_libraries(lr_static newton_opt_static)
-target_link_libraries(lr_static str_static)
-target_link_libraries(lr_static idmap_static)
 target_link_libraries(lr_static auc_static)
+
+#lib pr
+SET(LIBpr_SRC pr.c)
+ADD_LIBRARY(pr_static STATIC ${LIBpr_SRC})
+SET_TARGET_PROPERTIES(pr_static PROPERTIES OUTPUT_NAME "pr")
+SET_TARGET_PROPERTIES(pr_static PROPERTIES CLEAN_DIRECT_OUTPUT 1)
+INSTALL(TARGETS pr_static LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
+INSTALL(FILES regression.h DESTINATION include)
+target_link_libraries(pr_static newton_opt_static)
+
+#lib gr
+SET(LIBgr_SRC gr.c)
+ADD_LIBRARY(gr_static STATIC ${LIBgr_SRC})
+SET_TARGET_PROPERTIES(gr_static PROPERTIES OUTPUT_NAME "gr")
+SET_TARGET_PROPERTIES(gr_static PROPERTIES CLEAN_DIRECT_OUTPUT 1)
+INSTALL(TARGETS gr_static LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
+INSTALL(FILES regression.h DESTINATION include)
+target_link_libraries(gr_static newton_opt_static)
+
+#lib er
+SET(LIBer_SRC er.c)
+ADD_LIBRARY(er_static STATIC ${LIBer_SRC})
+SET_TARGET_PROPERTIES(er_static PROPERTIES OUTPUT_NAME "er")
+SET_TARGET_PROPERTIES(er_static PROPERTIES CLEAN_DIRECT_OUTPUT 1)
+INSTALL(TARGETS er_static LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
+INSTALL(FILES regression.h DESTINATION include)
+target_link_libraries(er_static newton_opt_static)
+
+
+
 
 #lib auc
 SET(LIBauc_SRC auc.c)
